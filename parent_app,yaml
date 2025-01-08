@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: parent_app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/DevOps-Projects-Solutions/declartive-argocd
+    targetRevision: main
+    path: ./apps_yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
